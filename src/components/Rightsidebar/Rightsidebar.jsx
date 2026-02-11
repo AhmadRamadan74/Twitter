@@ -3,15 +3,16 @@ import { FaSearch } from 'react-icons/fa';
 import { HiOutlineDotsHorizontal } from 'react-icons/hi';
 import { BsPatchCheckFill } from 'react-icons/bs';
 import { trendingTopics, whoToFollow, newsItems } from '../../utils/mockData';
- 
+
 export default function RightSidebar() {
   const [searchQuery, setSearchQuery] = useState('');
 
   return (
-<div className="hidden xl:block h-screen overflow-y-auto px-6 py-2">
-      <div className="sticky top-0 bg-black pb-3 z-10">
+    <div className="w-[350px] h-screen overflow-y-scroll scrollbar-hide pr-4">
+      {/* Search Bar */}
+      <div className="sticky top-0 bg-black pt-2 pb-4 z-10">
         <div className="relative">
-          <FaSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 w-4 h-4" />
+          <FaSearch className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500" />
           <input
             type="text"
             placeholder="Search"
@@ -22,109 +23,107 @@ export default function RightSidebar() {
         </div>
       </div>
 
+      {/* Today's News */}
       <div className="bg-gray-900 rounded-2xl mb-4 overflow-hidden">
-        <div className="flex items-center justify-between p-4 border-b border-gray-800">
-          <h2 className="text-xl font-bold">Today's News</h2>
-          <button className="text-gray-500 hover:text-sky-500">
-            <HiOutlineDotsHorizontal className="w-5 h-5" />
-          </button>
-        </div>
-        
+        <h2 className="text-xl font-bold p-4 text-white">Today's News</h2>
         {newsItems.map((news) => (
-          <div 
+          <div
             key={news.id}
-            className="p-4 border-b border-gray-800 last:border-b-0 hover:bg-gray-800 transition-colors cursor-pointer"
-          >
-            <div className="flex justify-between items-start mb-1">
-              <span className="text-xs text-gray-500">{news.category}</span>
-              <button className="text-gray-500 hover:text-sky-500">
-                <HiOutlineDotsHorizontal className="w-4 h-4" />
-              </button>
-            </div>
-            <h3 className="font-bold text-sm mb-1">{news.title}</h3>
-            <span className="text-xs text-gray-500">
-              {news.time} · {news.posts}
-            </span>
-          </div>
-        ))}
-      </div>
-
-      <div className="bg-gray-900 rounded-2xl mb-4 overflow-hidden">
-        <h2 className="text-xl font-bold p-4 border-b border-gray-800">
-          What's happening
-        </h2>
-        
-        {trendingTopics.map((topic) => (
-          <div 
-            key={topic.id}
-            className="p-4 border-b border-gray-800 last:border-b-0 hover:bg-gray-800 transition-colors cursor-pointer"
+            className="px-4 py-3 hover:bg-gray-800 cursor-pointer transition-colors border-t border-gray-800"
           >
             <div className="flex justify-between items-start">
               <div className="flex-1">
-                <p className="text-xs text-gray-500 mb-1">{topic.category}</p>
-                <p className="font-bold text-sm mb-1">{topic.title}</p>
-                <p className="text-xs text-gray-500">{topic.posts} posts</p>
+                <p className="text-gray-500 text-sm">{news.category}</p>
+                <p className="text-white font-semibold mt-1">{news.title}</p>
+                <p className="text-gray-500 text-sm mt-1">
+                  {news.time} · {news.posts}
+                </p>
               </div>
-              <button className="text-gray-500 hover:text-sky-500">
-                <HiOutlineDotsHorizontal className="w-4 h-4" />
+              <HiOutlineDotsHorizontal className="text-gray-500 text-xl" />
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* What's happening */}
+      <div className="bg-gray-900 rounded-2xl mb-4 overflow-hidden">
+        <h2 className="text-xl font-bold p-4 text-white">What's happening</h2>
+        {trendingTopics.map((topic) => (
+          <div
+            key={topic.id}
+            className="px-4 py-3 hover:bg-gray-800 cursor-pointer transition-colors border-t border-gray-800"
+          >
+            <div className="flex justify-between items-start">
+              <div className="flex-1">
+                <p className="text-gray-500 text-sm">{topic.category}</p>
+                <p className="text-white font-bold mt-1">{topic.title}</p>
+                <p className="text-gray-500 text-sm mt-1">{topic.posts} posts</p>
+              </div>
+              <HiOutlineDotsHorizontal className="text-gray-500 text-xl" />
+            </div>
+          </div>
+        ))}
+        <div className="px-4 py-3 text-sky-500 hover:bg-gray-800 cursor-pointer transition-colors">
+          Show more
+        </div>
+      </div>
+
+      {/* Who to follow */}
+      <div className="bg-gray-900 rounded-2xl mb-4 overflow-hidden">
+        <h2 className="text-xl font-bold p-4 text-white">Who to follow</h2>
+        {whoToFollow.map((user) => (
+          <div
+            key={user.id}
+            className="px-4 py-3 hover:bg-gray-800 cursor-pointer transition-colors border-t border-gray-800"
+          >
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <img
+                  src={user.avatar}
+                  alt={user.name}
+                  className="w-12 h-12 rounded-full"
+                />
+                <div>
+                  <div className="flex items-center gap-1">
+                    <p className="text-white font-bold">{user.name}</p>
+                    {user.verified && (
+                      <BsPatchCheckFill className="text-sky-500" />
+                    )}
+                  </div>
+                  <p className="text-gray-500 text-sm">{user.username}</p>
+                </div>
+              </div>
+              <button className="bg-white text-black font-bold px-4 py-2 rounded-full hover:bg-gray-200 transition-colors">
+                Follow
               </button>
             </div>
           </div>
         ))}
-        
-        <button className="w-full text-left p-4 text-sky-500 hover:bg-gray-800 transition-colors">
+        <div className="px-4 py-3 text-sky-500 hover:bg-gray-800 cursor-pointer transition-colors">
           Show more
-        </button>
-      </div>
-
-      <div className="bg-gray-900 rounded-2xl overflow-hidden">
-        <h2 className="text-xl font-bold p-4 border-b border-gray-800">
-          Who to follow
-        </h2>
-        
-        {whoToFollow.map((user) => (
-          <div 
-            key={user.id}
-            className="p-4 flex items-center justify-between hover:bg-gray-800 transition-colors"
-          >
-            <div className="flex items-center gap-3 flex-1 min-w-0">
-              <img 
-                src={user.avatar}
-                alt={user.name}
-                className="w-12 h-12 rounded-full flex-shrink-0"
-              />
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-1">
-                  <p className="font-bold text-sm truncate">{user.name}</p>
-                  {user.verified && (
-                    <BsPatchCheckFill className="text-sky-500 w-4 h-4 flex-shrink-0" />
-                  )}
-                </div>
-                <p className="text-gray-500 text-sm truncate">{user.username}</p>
-              </div>
-            </div>
-            <button className="bg-white hover:bg-gray-200 text-black font-bold px-4 py-2 rounded-full text-sm transition-colors flex-shrink-0 ml-2">
-              Follow
-            </button>
-          </div>
-        ))}
-        
-        <button className="w-full text-left p-4 text-sky-500 hover:bg-gray-800 transition-colors">
-          Show more
-        </button>
-      </div>
-
-      <div className="mt-4 pb-4">
-        <div className="flex flex-wrap gap-2 text-xs text-gray-500">
-          <a href="#" className="hover:underline">Terms of Service</a>
-          <a href="#" className="hover:underline">Privacy Policy</a>
-          <a href="#" className="hover:underline">Cookie Policy</a>
-          <a href="#" className="hover:underline">Accessibility</a>
-          <a href="#" className="hover:underline">Ads info</a>
-          <a href="#" className="hover:underline">More...</a>
         </div>
-        <p className="text-xs text-gray-500 mt-2">© 2026 X Corp.</p>
       </div>
+
+      {/* Footer */}
+      <div className="text-gray-500 text-xs px-4 pb-4 flex flex-wrap gap-2">
+        <a href="#" className="hover:underline">Terms of Service</a>
+        <a href="#" className="hover:underline">Privacy Policy</a>
+        <a href="#" className="hover:underline">Cookie Policy</a>
+        <a href="#" className="hover:underline">Accessibility</a>
+        <a href="#" className="hover:underline">Ads info</a>
+        <a href="#" className="hover:underline">More...</a>
+        <p className="w-full mt-1">© 2026 X Corp.</p>
+      </div>
+
+      <style jsx>{`
+        .scrollbar-hide::-webkit-scrollbar {
+          display: none;
+        }
+        .scrollbar-hide {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+      `}</style>
     </div>
   );
 }

@@ -16,7 +16,7 @@ export default function TweetComposer() {
   };
 
   return (
-    <div className="border-b border-gray-700 p-4">
+    <div className="border-b border-gray-700 p-4 ">
       <div className="flex gap-3">
         <img 
           src={authUser?.avatar} 

@@ -1,22 +1,22 @@
-import React, { useState } from 'react';
-import Sidebar from '../Sidebar/Sidebar';
-import RightSidebar from '../Rightsidebar/Rightsidebar';
-import TweetComposer from '../Tweetcomposer/Tweetcomposer';
-import Post from '../Post/Post';
-import { mockPosts } from '../../utils/mockData';
-import { MdStars } from 'react-icons/md';
+import React, { useState } from "react";
+import Sidebar from "../Sidebar/Sidebar";
+import RightSidebar from "../Rightsidebar/Rightsidebar";
+import TweetComposer from "../Tweetcomposer/Tweetcomposer";
+import Post from "../Post/Post";
+import { mockPosts } from "../../utils/mockData";
+import { MdStars } from "react-icons/md";
 
 export default function Home() {
-  const [activeTab, setActiveTab] = useState('forYou');
+  const [activeTab, setActiveTab] = useState("forYou");
   const [posts, setPosts] = useState(mockPosts);
 
   return (
-    <div className="flex h-screen bg-black text-white overflow-hidden">
-      {/* Left Sidebar */}
+    <div className="w-[95%] flex h-screen bg-black text-white overflow-hidden">
+      {/* Sidebar */}
       <Sidebar />
 
-      {/* Main Feed */}
-<div className="flex-1 border-x border-gray-700 overflow-y-auto">
+      {/* Main  */}
+      <div className="flex-1 border-x border-gray-700 overflow-y-scroll scrollbar-hide mr-10">
         {/* Header */}
         <div className="sticky top-0 z-10 bg-black/80 backdrop-blur-md border-b border-gray-700">
           <div className="flex items-center justify-between px-4 py-3">
@@ -29,35 +29,34 @@ export default function Home() {
           {/* Tabs */}
           <div className="flex">
             <button
-              onClick={() => setActiveTab('forYou')}
+              onClick={() => setActiveTab("forYou")}
               className={`flex-1 py-4 text-center font-semibold transition-colors relative ${
-                activeTab === 'forYou' 
-                  ? 'text-white' 
-                  : 'text-gray-500 hover:bg-gray-900'
+                activeTab === "forYou"
+                  ? "text-white"
+                  : "text-gray-500 hover:bg-gray-900"
               }`}
             >
               For you
-              {activeTab === 'forYou' && (
+              {activeTab === "forYou" && (
                 <div className="absolute bottom-0 left-0 right-0 h-1 bg-sky-500 rounded-full" />
               )}
             </button>
             <button
-              onClick={() => setActiveTab('following')}
+              onClick={() => setActiveTab("following")}
               className={`flex-1 py-4 text-center font-semibold transition-colors relative ${
-                activeTab === 'following' 
-                  ? 'text-white' 
-                  : 'text-gray-500 hover:bg-gray-900'
+                activeTab === "following"
+                  ? "text-white"
+                  : "text-gray-500 hover:bg-gray-900"
               }`}
             >
               Following
-              {activeTab === 'following' && (
+              {activeTab === "following" && (
                 <div className="absolute bottom-0 left-0 right-0 h-1 bg-sky-500 rounded-full" />
               )}
             </button>
           </div>
         </div>
 
-        {/* Tweet Composer */}
         <TweetComposer />
 
         {/* Posts Feed */}
@@ -73,7 +72,6 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Right Sidebar */}
       <RightSidebar />
     </div>
   );

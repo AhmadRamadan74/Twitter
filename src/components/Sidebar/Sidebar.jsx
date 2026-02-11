@@ -21,45 +21,37 @@ const XLogo = () => (
 );
 
 export default function Sidebar() {
-  const { authUser, logout } = useContext(AuthUserContext);
+  const {authUser , logout} = useContext(AuthUserContext);
   const location = useLocation();
-
   const navItems = [
-    { icon: FaHome, label: 'Home', path: '/' },
-    { icon: FaSearch, label: 'Explore', path: '/explore' },
-    { icon: FaBell, label: 'Notifications', path: '/notifications' },
-    { icon: FaEnvelope, label: 'Messages', path: '/messages' },
-    { icon: BsLightningChargeFill, label: 'Grok', path: '/grok' },
-    { icon: FaBookmark, label: 'Bookmarks', path: '/bookmarks' },
-    { icon: RiUserStarLine, label: 'Creator Studio', path: '/creator-studio' },
-    { icon: MdStars, label: 'Premium', path: '/premium' },
-    { icon: FaUser, label: 'Profile', path: '/profile' },
-    { icon: FaEllipsisH, label: 'More', path: '/more' }
-  ];
-
+      { icon: FaHome, label: 'Home', path: '/' },
+      { icon: FaSearch, label: 'Explore', path: '/explore' },
+      { icon: FaBell, label: 'Notifications', path: '/notifications' },
+      { icon: FaEnvelope, label: 'Messages', path: '/messages' },
+      { icon: BsLightningChargeFill, label: 'Grok', path: '/grok' },
+      { icon: FaBookmark, label: 'Bookmarks', path: '/bookmarks' },
+      { icon: RiUserStarLine, label: 'Creator Studio', path: '/creator-studio' },
+      { icon: MdStars, label: 'Premium', path: '/premium' },
+      { icon: FaUser, label: 'Profile', path: '/profile' },
+      { icon: FaEllipsisH, label: 'More', path: '/more' }
+  ]
+  
   return (
-    <div className="w-80 h-screen sticky top-0 flex flex-col border-r border-gray-700 px-6">
-      <div className="p-3 mb-1">
-        <Link to="/" className="inline-flex items-center justify-center w-12 h-12 rounded-full hover:bg-gray-900 transition-colors">
-          <XLogo />
-        </Link>
-      </div>
+    <>
+      <div className='w-80 h-screen sticky top-0 flex flex-col border-r border-gray-700  px-6'>
+        <div className="p-3 mb-1">
+          <Link to={"/"} className='inline-flex items-center justify-center w-12 h-12 rounded-full hover:bg-gray-900 transition-colors'>
+            <XLogo />
+          </Link>
+        </div>
 
-      <nav className="flex-1">
-        {navItems.map((item) => {
-          const Icon = item.icon;
-          const isActive = location.pathname === item.path;
-          
-          return (
-            <Link
-              key={item.path}
-              to={item.path}
-              className={`flex items-center gap-5 px-4 py-4 rounded-full transition-colors mb-1 ${
-                isActive 
-                  ? 'font-bold' 
-                  : 'font-normal hover:bg-gray-900'
-              }`}
-            >
+
+      <nav className='flex-1'>
+          {navItems.map((item) => {
+            const Icon = item.icon;
+            const isActive = location.pathname === item.path;
+            return (
+              <Link key={item.path} to={item.path} className={`flex items-center gap-5 px-4 py-4 rounded-full transition-colors mb-1 ${isActive ? 'font-bold' : 'font-normal hover:bg-gray-900'}`}>
               <Icon className="w-6 h-6" />
               <span className="text-xl">{item.label}</span>
             </Link>
@@ -67,7 +59,7 @@ export default function Sidebar() {
         })}
       </nav>
 
-      <button className="bg-sky-500 hover:bg-sky-600 text-white font-bold text-lg rounded-full py-3 px-6 mb-4 transition-colors w-full flex items-center justify-center gap-2">
+         <button className="bg-sky-500 hover:bg-sky-600 text-white font-bold text-lg rounded-full py-3 px-6 mb-4 transition-colors w-full flex items-center justify-center gap-2">
         <BsPencilSquare className="w-5 h-5" />
         Post
       </button>
@@ -92,5 +84,11 @@ export default function Sidebar() {
         </div>
       )}
     </div>
-  );
+        {/* <Link to={items.path} key={items.path} className={`flex items-center gap-5 px-4 py-5 rounded-full transition-colors mb-1 ${isActive ? "font-bold" : "font-normal hover:bg-gray-900"}`}>
+          <Icon className= "w-6 h-6">
+            <span className='text-xl'>{items.label}</span>
+          </Icon>
+        </Link> */}
+    </>
+  )
 }
